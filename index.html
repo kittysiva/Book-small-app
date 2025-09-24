@@ -1,1 +1,257 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>புத்தக மேற்கோள்கள் - Book Quote Shorts</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
+    .container {
+      width: 90%;
+      max-width: 400px;
+      background: #222;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .quote {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin-bottom: 15px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .quote.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .author {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .book {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-bottom: 15px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .like.active {
+      color: red;
+    }
+
+    @media (max-width: 500px) {
+      .quote { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="viewer">
+    <div id="quote" class="quote">ஏற்றுகிறது...</div>
+    <div id="author" class="author"></div>
+    <div id="book" class="book"></div>
+
+    <div class="controls">
+      <button id="prev">⟨ முந்தையது</button>
+      <button id="like" class="like">♥ விருப்பம்</button>
+      <button id="next">அடுத்தது ⟩</button>
+    </div>
+  </div>
+
+  <script>    // List of quotes
+    const quotes = [
+      {
+        text: "யாதும் ஊரே யாவரும் கேளிர்.",
+        author: "கணியன் பூங்குன்றனார்",
+        book: "புறநானூறு"
+      },
+      {
+        text: "உழுதுண்டு வாழ்வாரே வாழ்வார், மற்றெல்லாம் தொழுதுண்டு வாழ்வார் தோல்வி அடைவார்.",
+        author: "திருவள்ளுவர்",
+        book: "திருக்குறள்"
+      },
+      {
+        text: "அறம் செய்வதே மிகச் சிறந்த செல்வம்.",
+        author: "திருவள்ளுவர்",
+        book: "திருக்குறள்"
+      },
+      {
+        text: "கற்றது கைமண் அளவு, கல்லாதது உலகளவு.",
+        author: "அவ்வையார்",
+        book: "அவ்வையார் பாடல்கள்"
+      }
+    ];
+
+    let index = 0; // start with first quote
+
+    const quoteEl = document.getElementById("quote");
+    const authorEl = document.getElementById("author");
+    const bookEl = document.getElementById("book");
+    const likeBtn = document.getElementById("like");
+    const container = document.getElementById("viewer");
+
+    //function to show quotefunction
+    function showQuote(i) {
+      quoteEl.classList.remove("active");
+      setTimeout(() => {
+        quoteEl.textContent = quotes[i].text;
+        authorEl.textContent = "— " + quotes[i].author;
+        bookEl.textContent = quotes[i].book;
+        quoteEl.classList.add("active");
+      }, 200);
+      likeBtn.classList.remove("active");
+    }
+
+    // next quote button
+    document.getElementById("next").onclick = () => {
+      index = (index + 1) % quotes.length;
+      showQuote(index);
+    };
+
+    // previous quote button
+    document.getElementById("prev").onclick = () => {
+      index = (index - 1 + quotes.length) % quotes.length;
+      showQuote(index);
+    };
+
+    // like button
+    likeBtn.onclick = () => {
+      likeBtn.classList.toggle("active");
+    };
+    // tab anywhere in container to ho next quote
+    container.onclick = (e) => {
+      if (e.target.tagName !== "BUTTON") {
+        index = (index + 1) % quotes.length;
+        showQuote(index);
+      }
+    };
+
+    //start from the first quote
+    showQuote(index);
+  </script>
+
+</body>
+</html>      .quote { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="viewer">
+    <div id="quote" class="quote">Loading...</div>
+    <div id="author" class="author"></div>
+    <div id="book" class="book"></div>
+
+    <div class="controls">
+      <button id="prev">⟨ Prev</button>
+      <button id="like" class="like">♥ Like</button>
+      <button id="next">Next ⟩</button>
+    </div>
+  </div>
+
+  <script>
+    // List of quotes
+    const quotes = [
+      {
+        text: "It is not our abilities that show what we truly are… it is our choices.",
+        author: "J.K. Rowling",
+        book: "Harry Potter and the Chamber of Secrets"
+      },
+      {
+        text: "There is some good in this world, and it’s worth fighting for.",
+        author: "J.R.R. Tolkien",
+        book: "The Two Towers"
+      },
+      {
+        text: "The only way out of the labyrinth of suffering is to forgive.",
+        author: "John Green",
+        book: "Looking for Alaska"
+      },
+      {
+        text: "So many things are possible just as long as you don’t know they’re impossible.",
+        author: "Norton Juster",
+        book: "The Phantom Tollbooth"
+      }
+    ];
+
+    let index = 0; // start with first quote
+
+    const quoteEl = document.getElementById("quote");
+    const authorEl = document.getElementById("author");
+    const bookEl = document.getElementById("book");
+    const likeBtn = document.getElementById("like");
+    const container = document.getElementById("viewer");
+
+    // Function to show a quote
+    function showQuote(i) {
+      quoteEl.classList.remove("active");
+      setTimeout(() => {
+        quoteEl.textContent = quotes[i].text;
+        authorEl.textContent = "— " + quotes[i].author;
+        bookEl.textContent = quotes[i].book;
+        quoteEl.classList.add("active");
+      }, 200);
+      likeBtn.classList.remove("active"); // reset like when changing
+    }
+
+    // Next button
+    document.getElementById("next").onclick = () => {
+      index = (index + 1) % quotes.length;
+      showQuote(index);
+    };
+
+    // Previous button
+    document.getElementById("prev").onclick = () => {
+      index = (index - 1 + quotes.length) % quotes.length;
+      showQuote(index);
+    };
+
+    // Like button
+    likeBtn.onclick = () => {
+      likeBtn.classList.toggle("active");
+    };
+
+    // Tap anywhere in the container to go next
+    container.onclick = (e) => {
+      if (e.target.tagName !== "BUTTON") {
+        index = (index + 1) % quotes.length;
+        showQuote(index);
+      }
+    };
+
+    // First quote on load
+    showQuote(index);
+  </script>
+
+</body>
+</html>
